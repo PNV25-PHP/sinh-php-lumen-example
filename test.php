@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Trình duyệt</title>
 </head> 
-
+n
 <body>
     <h1><?php echo $a ?></h1>
     <script>

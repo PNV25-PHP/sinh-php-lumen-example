@@ -1,7 +1,9 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+use App\Models\Model_User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
@@ -16,10 +18,18 @@ class LoginController extends Controller
 
     public function Login(Request $req)
     {
-        return [
-            "email" => $req->input("email"),
-            "password" => $req->input("password"),
-            "isSuccess" => true
-        ];
+
+        $email = $req->input('email');
+        $password = $req->input('password');
+
+        $inputData = $req->all();
+
+        $dbCallback = 'db';
+
+        $userModel = new Model_User($dbCallback);
+
+        $user = $userModel->checkCredentials($email, $password);
+
+        return response()->json(['user' => $user, 'requestData' => $inputData]);
     }
 }
